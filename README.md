@@ -1,4 +1,4 @@
-##Comp 20 S14 Group Project
+Comp 20 S14 Group Project
 ===========================
 
 Group 4:
