@@ -45,3 +45,8 @@ Title: Cost Eater
 ####Algorithms:
   * Basic calculation of time averaged-costs
   * Time and date calculations
+
+
+#COMMENTS BY MING
+* I don't understand the features.  Features are functionality that your web application will provide.
+* What's the need for sending email/SMSs? Ditto for geolocation.
