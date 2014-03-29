@@ -24,11 +24,11 @@ Title: Cost Eater
 --------------------------------------------------------------------
 
 ####Features (tentative):
-  * Server-side data persistence
-  * Front-end framework
-  * Charting/graphing
-  * Sending emails/SMS : sending weekly financial summary to users
-  * Geolocation : 
+  * Server-side data persistence : keep track of user history
+  * Front-end framework : likely Twitter Bootstrap
+  * Charting/graphing : visuals for grocery spending
+  * Sending emails/SMS : sending weekly financial summary to users/let user know when some food has expired or run out
+  * Geolocation : find the nearest grocery store
 
 --------------------------------------------------------------------
 
@@ -45,6 +45,15 @@ Title: Cost Eater
   * Basic calculation of time averaged-costs
   * Time and date calculations
 
+--------------------------------------------------------------------
+
+####Pages:
+  * Index: landing page; user creation/login
+  * HomePage: current status; cost estimate of next shopping
+  * History: see past grocery trips, and what they cost
+  * Input: add a recent shopping to your profile
+
+--------------------------------------------------------------------
 
 #COMMENTS BY MING
 * I don't understand the features.  Features are functionality that your web application will provide.
