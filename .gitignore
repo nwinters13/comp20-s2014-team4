@@ -1,1 +1,7 @@
 node_modules
+bootstrap
+bootstrap/css/bootstrap.css
+bootstrap/css/bootstrap.css.map
+bootstrap/css/bootstrap-theme.css
+bootstrap/css/bootstrap-theme.css.map
+bootstrap/bootstrap.js
