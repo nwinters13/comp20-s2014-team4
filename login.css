@@ -1,0 +1,26 @@
+body
+{
+	bgcolor="#eeeeee";
+}
+
+username
+{
+background:#00FF00;
+color: #00FF00;
+border-color: #212121;
+}
+
+password
+{
+background: #bfbfbf;
+color: #313131;
+border-color: #212121;
+}
+
+
+button
+{
+background:#bfbfbf;
+color:#000000;
+border-color:#212121;"
+}
