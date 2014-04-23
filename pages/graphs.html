@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawPieChart);
+
+
+// Get function for retrieving the data from the data base, drawChart will be called from
+// here.
+
+	// app.get('/', function (req, res) {
+// 		res.header("Access-Control-Allow-Origin", "*");
+// 		res.header("Access-Control-Allow-Headers", "X-Requested-With");
+// 		var indexPage = "";
+// 		mongo.Db.connect(mongoUri, function (err, db) {
+// 			db.collection("COLLECTION_NAME", function (er, col) {
+// 				col.find().sort({Type: 1}.toArray(function(err, types) {
+// 					drawChart(types);
+// 				});
+// 			});
+// 		});				
+// 	});
+
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      
+      // ARGUMENT WOULD BE TYPES (array)
+      function drawPieChart() {
+		
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        
+        // Create type variables
+        var dairy = 0;
+        var greens = 0;
+        var grocery = 0;
+        var alcohol = 0;
+        var meat = 0;
+        var grain = 0;
+        var other = 0;
+        
+        // Test Data
+        var types = new Array();
+        types[0] = "Dairy";
+        types[1] = "Greens";
+        types[2] = "Grocery";
+        types[3] = "Alcohol";
+        types[4] = "Meat";
+        types[5] = "Grain";
+        types[6] = "Other";
+        types[7] = "Dairy";
+        types[8] = "Greens";
+        types[9] = "Grocery";
+        types[10] = "Alcohol";
+        types[11] = "Meat";
+        types[12] = "Grain";
+        types[13] = "Other";
+        types[14] = "Dairy";
+        types[15] = "Greens";
+        types[16] = "Grocery";
+        types[17] = "Alcohol";
+        types[18] = "Meat";
+        types[19] = "Grain";
+        types[20] = "Other" ;             
+    	
+        data.addColumn('string', 'Type');
+        data.addColumn('number', 'Items');
+        
+        for (i = 0; i < types.length; i++) {
+        	if (types[i] = "Dairy") {
+        		dairy++;
+        	}
+        	if (types[i] = "Greens") {
+        		greens++;
+        	}
+        	if (types[i] = "Grocery") {
+        		grocery++;
+        	}
+        	if (types[i] = "Alcohol") {
+        		alcohol++;
+        	}	
+        	if (types[i] = "Meat") {
+        		meat++;
+        	}
+        	if (types[i] = "Grain") {
+        		grain++;
+        	}
+        	if (types[i] = "Other") {
+        		other++;
+        	}
+        }
+
+        data.addRows([
+          ['Dairy', dairy],
+          ['Greens', greens],
+          ['Grocery', grocery],
+          ['Meat', meat],
+          ['Grain', grain],
+          ['Alcohol', alcohol],
+          ['Other', other]
+        ]);
+
+        // Set chart options
+        var options = {'title':'What are you buying?',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
