@@ -69,31 +69,31 @@
         types[17] = "Alcohol";
         types[18] = "Meat";
         types[19] = "Grain";
-        types[20] = "Other" ;             
+        types[20] = "Dairy" ;             
     	
         data.addColumn('string', 'Type');
         data.addColumn('number', 'Items');
         
         for (i = 0; i < types.length; i++) {
-        	if (types[i] = "Dairy") {
+        	if (types[i] == "Dairy") {
         		dairy++;
         	}
-        	if (types[i] = "Greens") {
+        	if (types[i] == "Greens") {
         		greens++;
         	}
-        	if (types[i] = "Grocery") {
+        	if (types[i] == "Grocery") {
         		grocery++;
         	}
-        	if (types[i] = "Alcohol") {
+        	if (types[i] == "Alcohol") {
         		alcohol++;
         	}	
-        	if (types[i] = "Meat") {
+        	if (types[i] == "Meat") {
         		meat++;
         	}
-        	if (types[i] = "Grain") {
+        	if (types[i] == "Grain") {
         		grain++;
         	}
-        	if (types[i] = "Other") {
+        	if (types[i] == "Other") {
         		other++;
         	}
         }
