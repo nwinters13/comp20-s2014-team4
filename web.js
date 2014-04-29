@@ -15,9 +15,12 @@ mongo.Db.connect(mongoUri, function (err, db) {
 */
 
 app.use(logfmt.requestLogger());
+app.use(express.static(__dirname + 'public'));
+
+//app.get('/', routes.login);
 
 app.get('/', function(req, res) {
-  res.send('Hello World!');
+  res.sendfile('./pages/login.html');
 });
 
 var port = Number(process.env.PORT || 5000);
