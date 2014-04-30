@@ -3,17 +3,15 @@
 
 <head>
 	<title>Cost Eater Product Page</title>
-	<link rel="stylesheet" type="text/css" href="/css/inputpage.css">
-	<script type="text/javascript" src="/js/inputpage.js"></script>
+	<link rel="stylesheet" type="text/css" href="../public/css/inputpage.css">
+	<script type="text/javascript" src="../public/js/jquery.min.js"></script>
 </head>
 
 <body>
-<center>
-<form>
 
-</form>
-<input type="button" value="additem"  onclick="additem()"onMouseOver="this.style.color = '#11DD22';" onMouseOut="this.style.color = '#000000';" onFocus="this.style.color = '#404040';" onBlur="this.style.color = '#000000';">
-<input type="button" value="finish"  onclick="addtrip()"onMouseOver="this.style.color = '#11DD22';" onMouseOut="this.style.color = '#000000';" onFocus="this.style.color = '#404040';" onBlur="this.style.color = '#000000';">
+<center>
+
+
 
 
 <h2>Add New Trip</h2>
@@ -26,17 +24,24 @@ Date:
 </select>
 
 
-	<table class="tableSection">
-		<tbody>
-			<tr>
-				<td>Item:<input name="item" ></td>
-				<td>Type:<input name="type" ></td>
-				<td>Price:<input name="price"></td>
-				<td>Days:<input name="days" ></td>
-			</tr>
-		</tbody>
-	</table>
-	
+
+<table id="myTable">
+<tr>
+	<td>Item:<input name="item" ></td>
+	<td>Type:<input name="type" ></td>
+	<td>Price:<input name="price"></td>
+	<td>Days:<input name="days" ></td>
+</tr>
+</table>
+
+
+
+
+<button onclick="myCreateFunction()">Add Item</button>
+<button onclick="myDeleteFunction()">Delete Item</button>
+<button onclick="sendData()">finish</button>
+
 <center>
+<script type="text/javascript" src="../public/js/inputpage.js"></script>
 </body>
 </html>
