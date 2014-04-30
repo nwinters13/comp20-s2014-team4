@@ -52,8 +52,16 @@ app.get('/js/_graph.js', function(req, res) {
     res.sendfile('./public/js/_graph.js');
 });
 
-app.get('/js/_main.js', function(req, res) {
-    res.sendfile('./public/js/_main.js');
+app.get('/js/_graph.js', function(req, res) {
+    res.sendfile('./public/js/_graph.js');
+});
+
+app.get('/js/jquery.min.js', function(req, res) {
+    res.sendfile('./public/js/jquery.min.js');
+});
+
+app.get('/js/vendor/jquery-1.9.1.min.js', function(req, res) {
+    res.sendfile('./public/js/vendor/jquery-1.9.1.min.js');
 });
 
 app.get('/css/normalize.css', function(req, res) {
