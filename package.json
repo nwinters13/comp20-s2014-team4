@@ -4,9 +4,11 @@
   "description": "Comp 20 S14 Group Project ===========================",
   "main": "web.js",
   "dependencies": {
-    "express": "^4.0.0",
+    "express": "3.5.1",
     "logfmt": "^1.1.2",
-    "mongodb": "^1.4.0"
+    "mongodb": "^1.4.0",
+    "connect": "^2.14.5",
+    "body-parser": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
