@@ -28,7 +28,7 @@ function onLogin(){
         sendTheMail(m, params);
     }
     else {
-        window.location.href = "http://stackoverflow.com";
+        window.location.href = "http://costeater.herokuapp.com/graphspage";
     }
 
 
@@ -40,7 +40,7 @@ function sendTheMail(m, params) {
 // Send the email!
     console.log('sending!');
     m.messages.send(params, function(res) {
-        window.location.href = "http://stackoverflow.com";
+        window.location.href = "http://costeater.herokuapp.com/graphspage";
         console.log(res);
     }, function(err) {
         console.log(err);
