@@ -162,7 +162,7 @@ main {
 }
 
 .hsContent {
-	max-width: 700px;
+	max-width: 1000px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -180,13 +180,14 @@ main {
 		color: #b2b2b2;
 	}
 	.hsContent a {
-		color: #b2b2b2;
+		color: #00EEEE;
 		text-decoration: underline;
 	}
 
 /* Slide 1 */
 #slide-1 .bcg {background-image:url('http://i.imgur.com/ZyZdcOT.jpg')}
 #slide-1 .hsContent {
+	margin-left: -150px;
 	bottom: 200px;
 	top: auto;
 }
@@ -202,7 +203,9 @@ main {
 /* Slide 3 */
 #slide-3 .bcg {background-image:url('http://i.imgur.com/TGLHuON.jpg')}
 #slide-3 .hsContent {
-	margin-left: -239px;
+	margin-left: -600px;
+	/*margin-bottom: 500px;*/
+	margin-top: -200px;
 }
 	#slide-3 h2 {
 		color: #f2ead6;
@@ -215,9 +218,7 @@ main {
 	margin-left: -450px;
 }
 	#slide-4 h2 {
-		background: none;
-		padding-left: 0;
-		padding-right: 0;
+		background-color: rgba(0,0,0,0.6);
 	}
 
 /* ==========================================================================

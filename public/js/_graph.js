@@ -1,7 +1,5 @@
-
-
 // Load the Visualization API and the piechart package.
-google.load('visualization', '1.0', {'packages':['corechart', 'table', 'annotatedtimeline', 'charteditor']});
+google.load('visualization', '1.0', {'packages':['corechart', 'table', 'annotatedtimeline']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.setOnLoadCallback(loadData());
@@ -45,14 +43,6 @@ var expirationTrips = [];
 // instantiates the pie chart, passes in the data and
 // draws it.
 
-function checkExpiration(item) {
-	console.log(item);
-	var date = new Date(item.expiration[0], item.expiration[1], item.expiration[2]);
-	if (date > Date()) {
-		expiredItems++;
-	}
-}
-
 function loadData() {
 	// Get the user's email which has been stored in localStorage[]
 	var user = localStorage['CEemail'];
@@ -60,64 +50,54 @@ function loadData() {
 	// jQuery get function to grab all the data from our DB
 	//$.get("http://costeater.heroku.com/user.json?email=" + user, function (data){
 	$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
-
 			// Gather all of the necessary data for our charts
 			for (var tripInt in data[0].trips) {	
 				var date = new Date(data[0].trips[tripInt].date.year, data[0].trips[tripInt].date.month, data[0].trips[tripInt].date.day);
 				for (var itemInt in data[0].trips[tripInt].items) {
 					var item = data[0].trips[tripInt].items[itemInt];
-					if (item.type == "Dairy") {
-						checkExpiration(item);
+					if (item.type == "dairy") {
 						dairy++;
 						dairyP += item.price;
 						totalP += item.price;
 						dairyS += (item.name + " ");
-						console.log("Houston we have some dairy");
 					}
 					if (item.type == "veggies") {
-						checkExpiration(item);
 						veggies++;
 						veggiesP += item.price;
 						totalP += item.price;
 						veggiesS += (item.name + " ");
 					}
 					if (item.type == "fruit") {
-						checkExpiration(item);
 						fruit++;
 						fruitP += item.price;
 						totalP += item.price;
 						fruitS += (item.name + " ");
 					}
 					if (item.type == "grocery") {
-						checkExpiration(item);
 						grocery++;
 						groceryP += item.price;
 						totalP += item.price;
 						groceryS += (item.name + " ");
 					}
 					if (item.type == "alcohol") {
-						checkExpiration(item);
 						alcohol++;
 						alcoholP += item.price;
 						totalP += item.price;
 						alcoholS += (item.name + " ");
 					}	
 					if (item.type == "meat") {
-						checkExpiration(item);
 						meat++;
 						meatP += item.price;
 						totalP += item.price;
 						meatS += (item.name + " ");
 					}
 					if (item.type == "grain") {
-						checkExpiration(item);
 						grain++;
 						grainP += item.price;
 						totalP += item.price;
 						grainS += (item.name + " ");
 					}
 					if (item.type == "other") {
-						checkExpiration(item);
 						other++;
 						dairyP += item.price;
 						totalP += item.price;
@@ -158,13 +138,12 @@ function loadData() {
 				
 				// Add to an array of trips and an array of expiration items
 				trips.push(theTrip);
-				console.log(trips);
 			}
 			
 			// Draw the charts (originally occurred onload, now we load data first)
-			drawPieChart(trips);
+
 			drawLineGraph(trips);
-			drawGauge(totalItems, expiredItems);
+			drawPieChart(trips);
 	});
 }
 
@@ -177,32 +156,49 @@ function drawPieChart(trips) {
 	data.addColumn('string', 'Type');
 	data.addColumn('number', 'Items');
 	
-	
+	var dairyT = 0;
+	var veggiesT = 0;
+	var fruitT = 0;
+	var groceryT = 0;
+	var alcoholT = 0;
+	var meatT = 0;
+	var grainT = 0;
+	var otherT = 0;
+
 	for (var trip in trips) {
-		console.log(trips[trip]);
-		data.addRows([
-			['Dairy', trips[trip].dairy],
-			['Veggies', trips[trip].veggies],
-			['Fruit', trips[trip].fruit],
-			['Grocery', trips[trip].grocery],
-			['Meat', trips[trip].meat],
-			['Grain', trips[trip].grain],
-			['Alcohol', trips[trip].alcohol],
-			['Other', trips[trip].other]
-		]);
+		dairyT += trips[trip].dairy;
+		veggiesT += trips[trip].veggies;
+		fruitT += trips[trip].fruit;
+		groceryT += trips[trip].grocery;
+		meatT += trips[trip].meat;
+		grainT += trips[trip].grain;
+		alcoholT += trips[trip].alcohol;
+		otherT += trips[trip].other;
 	}
+	
+	data.addRows([
+		['Dairy', dairyT],
+		['Veggies', veggiesT],
+		['Fruit', fruitT],
+		['Grocery', groceryT],
+		['Meat', meatT],
+		['Grain', grainT],
+		['Alcohol', alcoholT],
+		['Other', otherT]
+	]);
+
 
 
 	// Set chart options
 	var options = {'title':'What are you buying?',
-				   'is3D':true,
-				   'width':600,
-				   'height':500};
+				   'is3D':true
+				   };
+
 
 	// Instantiate and draw our chart, passing in some options.
 	var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 	chart.draw(data, options);
-	console.log("dinguscentral");
+
 }
 
 function drawLineGraph(trips) {
@@ -242,23 +238,11 @@ function drawLineGraph(trips) {
   	// Add a row for each trip to the data table
 	for (var trip in trips) {
 		data.addRows([
-			[trip.date, trip.dairyP, 'Dairy', trip.dairyS, trip.eatP, 'Meat', trip.meatS, trip.veggiesP, 'Veggies', trip.veggiesS, trip.fruitP, 'Fruit', trip.fruitS, trip.grainP, 'Grain', trip.grainS, trip.groceryP, 'Grocery', trip.groceryS, trip.alcoholP, 'Alcohol', trip.alcoholS, trip.otherP, 'Other', trip.otherS, trip.totalP, 'Total', trip.totalS]
+			[trips[trip].date, trips[trip].dairyP, 'Dairy', trips[trip].dairyS, trips[trip].meatP, 'Meat', trips[trip].meatS, trips[trip].veggiesP, 'Veggies', trips[trip].veggiesS, trips[trip].fruitP, 'Fruit', trips[trip].fruitS, trips[trip].grainP, 'Grain', trips[trip].grainS, trips[trip].groceryP, 'Grocery', trips[trip].groceryS, trips[trip].alcoholP, 'Alcohol', trips[trip].alcoholS, trips[trip].otherP, 'Other', trips[trip].otherS, trips[trip].totalP, 'Total', trips[trip].totalS]
 		]);
 	}
 	
 	// Instantiate and draw our chart, passing in some options.
 	var annotatedtimeline = new google.visualization.AnnotatedTimeLine(document.getElementById('annotated_timeline'));
-	annotatedtimeline.draw(data, {'displayAnnotations': true});
-}
-
-function drawGauge(totalItems, expiredItems) {
-	// Create and populate the data table.
-	var percentExp = (expiredItems/totalItems)*100;
-	var data = google.visualization.arrayToDataTable([
-		['Label', 'Value'],
-		['% Items Expired', percentExp]
-	]);
-
-	// Create and draw the visualization.
-	new google.visualization.Gauge(document.getElementById('gauge')).draw(data);
+	annotatedtimeline.draw(data, {'displayAnnotations': false, 'fill': 25, 'allowRedraw': true, 'thickness': 2});
 }
