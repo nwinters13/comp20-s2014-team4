@@ -34,12 +34,32 @@ app.get('/graphs.html', function(req, res) {
     res.sendfile('./public/graphpage.html');    
 });
 
-app.get('/_graph.js', function(req, res) {
+app.get('/js/_graph.js', function(req, res) {
     res.sendfile('./public/js/_graph.js');
 });
 
-app.get('/_main.js', function(req, res) {
+app.get('/js/_main.js', function(req, res) {
     res.sendfile('./public/js/_main.js');
+});
+
+app.get('/css/normalize.css', function(req, res) {
+    res.sendfile('./public/css/normalize.css');
+});
+
+app.get('/css/main.css', function(req, res) {
+    res.sendfile('./public/css/main.css');
+});
+
+app.get('/js/vendor/modernizr-2.7.1.min.js', function(req, res) {
+    res.sendfile('./public/js/vendor/modernizr-2.7.1.min.js');
+});
+
+app.get('/js/imagesloaded.js', function(req, res) {
+    res.sendfile('./public/js/imagesloaded.js');
+});
+
+app.get('/js/skrollr.js', function(req, res) {
+    res.sendfile('./public/js/skrollr.js');
 });
 
 app.get('/bootstrap.min.css', function(req, res){
