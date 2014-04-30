@@ -1,5 +1,5 @@
 // web.js
-var express = require("express");
+var express = require('express');
 var mongo = require('mongodb');
 var connect = require('connect');
 var bodyParser = require('body-parser');
@@ -16,6 +16,38 @@ app.get('/', function(req, res) {
 
 app.get('/login.html', function(req, res) {
     res.sendfile('./public/login.html');
+});
+
+app.get('/login.js', function(req, res) {
+    res.sendfile('./public/js/login.js');
+});
+
+app.get('/js/login.js', function(req, res) {
+    res.sendfile('./public/js/login.js');
+});
+
+app.get('/graphs', function(req, res) {
+    res.sendfile('./public/graphpage.html');
+});
+
+app.get('/graphs.html', function(req, res) {
+    res.sendfile('./public/graphpage.html');    
+});
+
+app.get('/_graph.js', function(req, res) {
+    res.sendfile('./public/js/_graph.js');
+});
+
+app.get('/_main.js', function(req, res) {
+    res.sendfile('./public/js/_main.js');
+});
+
+app.get('/bootstrap.min.css', function(req, res){
+    res.sendfile('./public/css/bootstrap.min.css');
+});
+
+app.get('/css/bootstrap.min.css', function(req, res){
+    res.sendfile('./public/css/bootstrap.min.css');
 });
 
 app.post('/post.json', function(req, res){
@@ -62,10 +94,6 @@ app.get('/user.json', function(req, res){
 	    });
 	});
     });
-});
-
-app.get('/bootstrap.min.css', function(req, res){
-    res.sendfile('./public/css/bootstrap.min.css');
 });
 
 var port = Number(process.env.PORT || 5000);
