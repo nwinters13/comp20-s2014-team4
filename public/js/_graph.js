@@ -31,21 +31,21 @@ var meatS = "";
 var grainS = "";
 var otherS = "";
 
+var totalItems = 0;
+var expiredItems = 0;
 var trips = [];
 var expiringItems = [];
-var expirationDays = []; 
+var expirationTrips = []; 
 
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
 
 function checkExpiration(item) {
-	if (item.expiration > Date()) {
-		var expItem = {
-			name: item.name,
-			date: item.expiration
-		}
-		expiringItems.push(expItem);
+	var dateArr = JSON.parse(item.expiration);
+	var date = new Date(parseInt(item.expiration[0]), parseInt(item.expiration[1]), parseInt(item.expiration[2]));
+	if (date > Date()) {
+		expiredItems++;
 	}
 }
 
@@ -54,15 +54,19 @@ function loadData() {
 	var user = localStorage['CEemail'];
 	
 	// jQuery get function to grab all the data from our DB
-	$.get("heroku url here", { email: user })
-		.done(function(data) {
+	$.get("http://costeater.heroku.com/user.json?email=user", function (data){
 			// Parse the JSON into a trips object
 			var userObj = JSON.parse(data);
-			
 			// Gather all of the necessary data for our charts
-			for (var trip in userObj['trips']) {
-				var date = trip.date;
-				for (var item in trip['items']) {
+			for (var tripString in userObj[0].trips[]) {
+				// Parse each trip string into an object
+				var trip = JSON.parse(tripString);
+				// Parse each date into an object
+				var dateArr = JSON.parse(trip.date);
+				// Traverse the dateArr to create a Date object			
+				var date = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]));
+				for (var itemString in trip['items']) {
+					var item = JSON.parse(itemString);
 					if (item.type == "Dairy") {
 						checkExpiration(item);
 						dairy++;
@@ -119,11 +123,12 @@ function loadData() {
 						totalP += item.price;
 						otherS += (item.name + " ");
 					}
+					totalItems++;
 				}
 				
 				// If any values are null, no point is drawn for them. This is good!!
-				var trip = {
-					dairy: dairy, 
+				var theTrip = {
+					dairy: dairy,
 					meat: meat, 
 					veggies: veggies,
 					fruit: fruit,
@@ -150,15 +155,15 @@ function loadData() {
 					totalP: totalP, 
 					date: date
 				};
+				
 				// Add to an array of trips and an array of expiration items
-				trips.push(trip);
-				expirationDays.push(expiringItems);
+				trips.push(theTrip);
 			}
 			
 			// Draw the charts (originally occurred onload, now we load data first)
 			drawPieChart(trips);
 			drawLineGraph(trips);
-			
+			drawGauge(totalItems, expiredItems);
 	});
 }
 
@@ -173,7 +178,8 @@ function drawPieChart(trips) {
 	for (var trip in trips) {
 		data.addRows([
 			['Dairy', trip.dairy],
-			['Greens', trip.greens],
+			['Veggies', trip.veggies],
+			['Fruit', trip.fruit],
 			['Grocery', trip.grocery],
 			['Meat', trip.meat],
 			['Grain', trip.grain],
@@ -228,12 +234,23 @@ function drawLineGraph(trips) {
   	// Add a row for each trip to the data table
 	for (var trip in trips) {
 		data.addRows([
-			[trip.date, dairyP, 'Dairy', dairyS, meatP, 'Meat', meatS, veggiesP, 'Veggies', veggiesS, fruitP, 'Fruit', fruitS, grainP, 'Grain', grainS, groceryP, 'Grocery', groceryS, alcoholP, 'Alcohol', alcoholS, otherP, 'Other', otherS]
+			[trip.date, trip.dairyP, 'Dairy', trip.dairyS, trip.eatP, 'Meat', trip.meatS, trip.veggiesP, 'Veggies', trip.veggiesS, trip.fruitP, 'Fruit', trip.fruitS, trip.grainP, 'Grain', trip.grainS, trip.groceryP, 'Grocery', trip.groceryS, trip.alcoholP, 'Alcohol', trip.alcoholS, trip.otherP, 'Other', trip.otherS, trip.totalP, 'Total', trip.totalS]
 		]);
 	}
 	
-	// Instantiate and draw or chart, passing in some options.
+	// Instantiate and draw our chart, passing in some options.
 	var annotatedtimeline = new google.visualization.AnnotatedTimeLine(document.getElementById('annotated_timeline'));
 	annotatedtimeline.draw(data, {'displayAnnotations': true});
 }
-​
+
+function drawGauge(totalItems, expiredItems) {
+	// Create and populate the data table.
+	var percentExp = (expiredItems/totalItems)*100;
+	var data = google.visualization.arrayToDataTable([
+		['Label', 'Value'],
+		['% Items Expired', percentExp]
+	]);
+
+	// Create and draw the visualization.
+	new google.visualization.Gauge(document.getElementById('gauge')).draw(data);
+}
