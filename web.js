@@ -1,6 +1,6 @@
 // web.js
 var express = require("express");
-var logfmt = require("logfmt");
+//var logfmt = require("logfmt");
 var mongo = require('mongodb');
 var app = express();
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
@@ -14,13 +14,13 @@ mongo.Db.connect(mongoUri, function (err, db) {
 });
 */
 
-app.use(logfmt.requestLogger());
-app.use(express.static(__dirname + 'public'));
 
-//app.get('/', routes.login);
+//app.use(logfmt.requestLogger());
+
+//app.use("/public", express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-  res.sendfile('./pages/login.html');
+  res.sendfile('./public/login.html');
 });
 
 var port = Number(process.env.PORT || 5000);
