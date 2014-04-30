@@ -1,10 +1,10 @@
+
+
 // Load the Visualization API and the piechart package.
-google.load('visualization', '1.0', {'packages':['corechart']});
+google.load('visualization', '1.0', {'packages':['corechart', 'table', 'annotatedtimeline', 'charteditor']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.setOnLoadCallback(loadData());
-
-
 
 var dairy = 0;
 var veggies = 0;
@@ -33,19 +33,21 @@ var meatS = "";
 var grainS = "";
 var otherS = "";
 
+var totalP = 0;
 var totalItems = 0;
 var expiredItems = 0;
 var trips = [];
 var expiringItems = [];
 var expirationTrips = []; 
 
+
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
 
 function checkExpiration(item) {
-	var dateArr = JSON.parse(item.expiration);
-	var date = new Date(parseInt(item.expiration[0]), parseInt(item.expiration[1]), parseInt(item.expiration[2]));
+	console.log(item);
+	var date = new Date(item.expiration[0], item.expiration[1], item.expiration[2]);
 	if (date > Date()) {
 		expiredItems++;
 	}
@@ -54,144 +56,139 @@ function checkExpiration(item) {
 function loadData() {
 	// Get the user's email which has been stored in localStorage[]
 	var user = localStorage['CEemail'];
-	
+	console.log("called loadData() with user: " + user);
 	// jQuery get function to grab all the data from our DB
+	//$.get("http://costeater.heroku.com/user.json?email=" + user, function (data){
+	$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://costeater.heroku.com/user.json?email=user', false);
-	xhr.send(null);
-	var response = xhr.responseText;
-	var parsed = JSON.parse(response);
-	
-	// Parse the JSON into a trips object
-	var userObj = JSON.parse(parsed);
-	// Gather all of the necessary data for our charts
-	for (var tripString in userObj[0].trips) {
-		// Parse each trip string into an object
-		var trip = JSON.parse(tripString);
-		// Parse each date into an object
-		var dateArr = JSON.parse(trip.date);
-		// Traverse the dateArr to create a Date object			
-		var date = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]));
-		for (var itemString in trip['items']) {
-			var item = JSON.parse(itemString);
-			if (item.type == "Dairy") {
-				checkExpiration(item);
-				dairy++;
-				dairyP += item.price;
-				totalP += item.price;
-				dairyS += (item.name + " ");
+			// Gather all of the necessary data for our charts
+			for (var tripInt in data[0].trips) {	
+				var date = new Date(data[0].trips[tripInt].date.year, data[0].trips[tripInt].date.month, data[0].trips[tripInt].date.day);
+				for (var itemInt in data[0].trips[tripInt].items) {
+					var item = data[0].trips[tripInt].items[itemInt];
+					if (item.type == "Dairy") {
+						checkExpiration(item);
+						dairy++;
+						dairyP += item.price;
+						totalP += item.price;
+						dairyS += (item.name + " ");
+						console.log("Houston we have some dairy");
+					}
+					if (item.type == "veggies") {
+						checkExpiration(item);
+						veggies++;
+						veggiesP += item.price;
+						totalP += item.price;
+						veggiesS += (item.name + " ");
+					}
+					if (item.type == "fruit") {
+						checkExpiration(item);
+						fruit++;
+						fruitP += item.price;
+						totalP += item.price;
+						fruitS += (item.name + " ");
+					}
+					if (item.type == "grocery") {
+						checkExpiration(item);
+						grocery++;
+						groceryP += item.price;
+						totalP += item.price;
+						groceryS += (item.name + " ");
+					}
+					if (item.type == "alcohol") {
+						checkExpiration(item);
+						alcohol++;
+						alcoholP += item.price;
+						totalP += item.price;
+						alcoholS += (item.name + " ");
+					}	
+					if (item.type == "meat") {
+						checkExpiration(item);
+						meat++;
+						meatP += item.price;
+						totalP += item.price;
+						meatS += (item.name + " ");
+					}
+					if (item.type == "grain") {
+						checkExpiration(item);
+						grain++;
+						grainP += item.price;
+						totalP += item.price;
+						grainS += (item.name + " ");
+					}
+					if (item.type == "other") {
+						checkExpiration(item);
+						other++;
+						dairyP += item.price;
+						totalP += item.price;
+						otherS += (item.name + " ");
+					}
+					totalItems++;
+				}
+				
+				// If any values are null, no point is drawn for them. This is good!!
+				var theTrip = {
+					dairy: dairy,
+					meat: meat, 
+					veggies: veggies,
+					fruit: fruit,
+					grocery: grocery,
+					alcohol: alcohol,
+					grain: grain,
+					other: other,
+					dairyP: dairyP, 
+					meatP: meatP, 
+					veggiesP: veggiesP,
+					fruitP: fruitP,
+					groceryP: groceryP,
+					alcoholP: alcoholP,
+					grainP: grainP,
+					otherP: otherP,
+					dairyS: dairyS, 
+					meatS: meatS, 
+					veggiesS: veggiesS,
+					fruitS: fruitS,
+					groceryS: groceryS,
+					alcoholS: alcoholS,
+					grainS: grainS,
+					otherS: otherS,
+					totalP: totalP, 
+					date: date
+				};
+				
+				// Add to an array of trips and an array of expiration items
+				trips.push(theTrip);
+				console.log(trips);
 			}
-			if (item.type == "Veggies") {
-				checkExpiration(item);
-				veggies++;
-				vegetablesP += item.price;
-				totalP += item.price;
-				veggiesS += (item.name + " ");
-			}
-			if (item.type == "Fruit") {
-				checkExpiration(item);
-				fruit++;
-				fruitP += item.price;
-				totalP += item.price;
-				fruitS += (item.name + " ");
-			}
-			if (item.type == "Grocery") {
-				checkExpiration(item);
-				grocery++;
-				groceryP += item.price;
-				totalP += item.price;
-				groceryS += (item.name + " ");
-			}
-			if (item.type == "Alcohol") {
-				checkExpiration(item);
-				alcohol++;
-				alcoholP += item.price;
-				totalP += item.price;
-				alcoholS += (item.name + " ");
-			}	
-			if (item.type == "Meat") {
-				checkExpiration(item);
-				meat++;
-				meatP += item.price;
-				totalP += item.price;
-				meatS += (item.name + " ");
-			}
-			if (item.type == "Grain") {
-				checkExpiration(item);
-				grain++;
-				grainP += item.price;
-				totalP += item.price;
-				grainS += (item.name + " ");
-			}
-			if (item.type == "Other") {
-				checkExpiration(item);
-				other++;
-				dairyP += item.price;
-				totalP += item.price;
-				otherS += (item.name + " ");
-			}
-			totalItems++;
-		}
-		
-		// If any values are null, no point is drawn for them. This is good!!
-		var theTrip = {
-			dairy: dairy,
-			meat: meat, 
-			veggies: veggies,
-			fruit: fruit,
-			grocery: grocery,
-			alcohol: alcohol,
-			grain: grain,
-			other: other,
-			dairyP: dairyP, 
-			meatP: meatP, 
-			veggiesP: veggiesP,
-			fruitP: fruitP,
-			groceryP: groceryP,
-			alcoholP: alcoholP,
-			grainP: grainP,
-			otherP: otherP,
-			dairyS: dairyS, 
-			meatS: meatS, 
-			veggiesS: veggiesS,
-			fruitS: fruitS,
-			groceryS: groceryS,
-			alcoholS: alcoholS,
-			grainS: grainS,
-			otherS: otherS,
-			totalP: totalP, 
-			date: date
-		};
-		
-		// Add to an array of trips and an array of expiration items
-		trips.push(theTrip);
-	}
-	
-	// Draw the charts (originally occurred onload, now we load data first)
-	drawPieChart(trips);
-	drawLineGraph(trips);
-	drawGauge(totalItems, expiredItems);
+			
+			// Draw the charts (originally occurred onload, now we load data first)
+			drawPieChart(trips);
+			drawLineGraph(trips);
+			drawGauge(totalItems, expiredItems);
+	});
 }
 
 function drawPieChart(trips) {
 
 	// Create the data table.
+
 	var data = new google.visualization.DataTable();
 
 	data.addColumn('string', 'Type');
 	data.addColumn('number', 'Items');
 	
+	
 	for (var trip in trips) {
+		console.log(trips[trip]);
 		data.addRows([
-			['Dairy', trip.dairy],
-			['Veggies', trip.veggies],
-			['Fruit', trip.fruit],
-			['Grocery', trip.grocery],
-			['Meat', trip.meat],
-			['Grain', trip.grain],
-			['Alcohol', trip.alcohol],
-			['Other', trip.other]
+			['Dairy', trips[trip].dairy],
+			['Veggies', trips[trip].veggies],
+			['Fruit', trips[trip].fruit],
+			['Grocery', trips[trip].grocery],
+			['Meat', trips[trip].meat],
+			['Grain', trips[trip].grain],
+			['Alcohol', trips[trip].alcohol],
+			['Other', trips[trip].other]
 		]);
 	}
 
@@ -205,6 +202,7 @@ function drawPieChart(trips) {
 	// Instantiate and draw our chart, passing in some options.
 	var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 	chart.draw(data, options);
+	console.log("dinguscentral");
 }
 
 function drawLineGraph(trips) {
@@ -235,6 +233,9 @@ function drawLineGraph(trips) {
 	data.addColumn('string', 'Type');
 	data.addColumn('string', 'Items');
     data.addColumn('number', 'Other');
+	data.addColumn('string', 'Type');
+	data.addColumn('string', 'Items');	
+    data.addColumn('number', 'Total');
 	data.addColumn('string', 'Type');
 	data.addColumn('string', 'Items');	
 
