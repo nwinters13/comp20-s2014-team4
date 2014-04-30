@@ -52,8 +52,8 @@ app.get('/js/_graph.js', function(req, res) {
     res.sendfile('./public/js/_graph.js');
 });
 
-app.get('/js/_graph.js', function(req, res) {
-    res.sendfile('./public/js/_graph.js');
+app.get('/js/_main.js', function(req, res) {
+    res.sendfile('./public/js/_main.js');
 });
 
 app.get('/js/jquery.min.js', function(req, res) {
