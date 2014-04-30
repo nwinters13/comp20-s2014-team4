@@ -1,12 +1,14 @@
 function onLogin(){
-
+    console.log('A');
     var newUser = true
     var msg = document.getElementById("email").value;
     if(msg == localStorage['CEemail']){
         newUser = false;
+        console.log('exists');
     }
     else {
         localStorage['CEemail'] = msg;
+        console.log('new');
     }
 
     // create a new instance of the Mandrill class with your API key
@@ -15,7 +17,7 @@ function onLogin(){
     // create a variable for the API call parameters
     var params = {
         "message": {
-            "from_email":"CostEaterTeam",
+            "from_email":"Team@CostEater.com",
             "to":[{"email": msg}],
             "subject": "Thanks from the Cost Eater Team",
             "text": "We here at the Cost Eater Headquarters would like to thank you for taking the time to enjoy what Cost Eater has to offer!"
@@ -25,6 +27,10 @@ function onLogin(){
     if(newUser == true){
         sendTheMail(m, params);
     }
+    else {
+        window.location.href = "http://stackoverflow.com";
+    }
+
 
 }
 
@@ -32,8 +38,9 @@ function onLogin(){
 
 function sendTheMail(m, params) {
 // Send the email!
-
+    console.log('sending!');
     m.messages.send(params, function(res) {
+        window.location.href = "http://stackoverflow.com";
         console.log(res);
     }, function(err) {
         console.log(err);
