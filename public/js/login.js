@@ -1,14 +1,12 @@
 function onLogin(){
-    console.log('A');
+
     var newUser = true
     var msg = document.getElementById("email").value;
     if(msg == localStorage['CEemail']){
         newUser = false;
-        console.log('exists');
     }
     else {
         localStorage['CEemail'] = msg;
-        console.log('new');
     }
 
     // create a new instance of the Mandrill class with your API key
@@ -28,7 +26,7 @@ function onLogin(){
         sendTheMail(m, params);
     }
     else {
-        window.location.href = "http://costeater.herokuapp.com/graphspage";
+        window.location.href = "http://costeater.herokuapp.com/graphs";
     }
 
 
@@ -38,10 +36,8 @@ function onLogin(){
 
 function sendTheMail(m, params) {
 // Send the email!
-    console.log('sending!');
     m.messages.send(params, function(res) {
-        window.location.href = "http://costeater.herokuapp.com/graphspage";
-        console.log(res);
+        window.location.href = "http://costeater.herokuapp.com/graphs";
     }, function(err) {
         console.log(err);
     });
