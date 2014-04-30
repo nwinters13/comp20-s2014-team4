@@ -2,7 +2,9 @@
 google.load('visualization', '1.0', {'packages':['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.setOnLoadCallback(getData());
+google.setOnLoadCallback(loadData());
+
+
 
 var dairy = 0;
 var veggies = 0;
@@ -54,117 +56,122 @@ function loadData() {
 	var user = localStorage['CEemail'];
 	
 	// jQuery get function to grab all the data from our DB
-	$.get("http://costeater.heroku.com/user.json?email=user", function (data){
-			// Parse the JSON into a trips object
-			var userObj = JSON.parse(data);
-			// Gather all of the necessary data for our charts
-			for (var tripString in userObj[0].trips[]) {
-				// Parse each trip string into an object
-				var trip = JSON.parse(tripString);
-				// Parse each date into an object
-				var dateArr = JSON.parse(trip.date);
-				// Traverse the dateArr to create a Date object			
-				var date = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]));
-				for (var itemString in trip['items']) {
-					var item = JSON.parse(itemString);
-					if (item.type == "Dairy") {
-						checkExpiration(item);
-						dairy++;
-						dairyP += item.price;
-						totalP += item.price;
-						dairyS += (item.name + " ");
-					}
-					if (item.type == "Veggies") {
-						checkExpiration(item);
-						veggies++;
-						vegetablesP += item.price;
-						totalP += item.price;
-						veggiesS += (item.name + " ");
-					}
-					if (item.type == "Fruit") {
-						checkExpiration(item);
-						fruit++;
-						fruitP += item.price;
-						totalP += item.price;
-						fruitS += (item.name + " ");
-					}
-					if (item.type == "Grocery") {
-						checkExpiration(item);
-						grocery++;
-						groceryP += item.price;
-						totalP += item.price;
-						groceryS += (item.name + " ");
-					}
-					if (item.type == "Alcohol") {
-						checkExpiration(item);
-						alcohol++;
-						alcoholP += item.price;
-						totalP += item.price;
-						alcoholS += (item.name + " ";
-					}	
-					if (item.type == "Meat") {
-						checkExpiration(item);
-						meat++;
-						meatP += item.price;
-						totalP += item.price;
-						meatS += (item.name + " ");
-					}
-					if (item.type == "Grain") {
-						checkExpiration(item);
-						grain++;
-						grainP += item.price;
-						totalP += item.price;
-						grainS += (item.name + " ");
-					}
-					if (item.type == "Other") {
-						checkExpiration(item);
-						other++;
-						dairyP += item.price;
-						totalP += item.price;
-						otherS += (item.name + " ");
-					}
-					totalItems++;
-				}
-				
-				// If any values are null, no point is drawn for them. This is good!!
-				var theTrip = {
-					dairy: dairy,
-					meat: meat, 
-					veggies: veggies,
-					fruit: fruit,
-					grocery: grocery,
-					alcohol: alcohol,
-					grain: grain,
-					other: other,
-					dairyP: dairyP, 
-					meatP: meatP, 
-					veggiesP: veggiesP,
-					fruitP: fruitP,
-					groceryP: groceryP,
-					alcoholP: alcoholP,
-					grainP: grainP,
-					otherP: otherP,
-					dairyS: dairyS, 
-					meatS: meatS, 
-					veggiesS: veggiesS,
-					fruitS: fruitS,
-					groceryS: groceryS,
-					alcoholS: alcoholS,
-					grainS: grainS,
-					otherS: otherS,
-					totalP: totalP, 
-					date: date
-				};
-				
-				// Add to an array of trips and an array of expiration items
-				trips.push(theTrip);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'http://costeater.heroku.com/user.json?email=user', false);
+	xhr.send(null);
+	var response = xhr.responseText;
+	var parsed = JSON.parse(response);
+	
+	// Parse the JSON into a trips object
+	var userObj = JSON.parse(parsed);
+	// Gather all of the necessary data for our charts
+	for (var tripString in userObj[0].trips) {
+		// Parse each trip string into an object
+		var trip = JSON.parse(tripString);
+		// Parse each date into an object
+		var dateArr = JSON.parse(trip.date);
+		// Traverse the dateArr to create a Date object			
+		var date = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]));
+		for (var itemString in trip['items']) {
+			var item = JSON.parse(itemString);
+			if (item.type == "Dairy") {
+				checkExpiration(item);
+				dairy++;
+				dairyP += item.price;
+				totalP += item.price;
+				dairyS += (item.name + " ");
 			}
-			
-			// Draw the charts (originally occurred onload, now we load data first)
-			drawPieChart(trips);
-			drawLineGraph(trips);
-			drawGauge(totalItems, expiredItems);
-	});
+			if (item.type == "Veggies") {
+				checkExpiration(item);
+				veggies++;
+				vegetablesP += item.price;
+				totalP += item.price;
+				veggiesS += (item.name + " ");
+			}
+			if (item.type == "Fruit") {
+				checkExpiration(item);
+				fruit++;
+				fruitP += item.price;
+				totalP += item.price;
+				fruitS += (item.name + " ");
+			}
+			if (item.type == "Grocery") {
+				checkExpiration(item);
+				grocery++;
+				groceryP += item.price;
+				totalP += item.price;
+				groceryS += (item.name + " ");
+			}
+			if (item.type == "Alcohol") {
+				checkExpiration(item);
+				alcohol++;
+				alcoholP += item.price;
+				totalP += item.price;
+				alcoholS += (item.name + " ");
+			}	
+			if (item.type == "Meat") {
+				checkExpiration(item);
+				meat++;
+				meatP += item.price;
+				totalP += item.price;
+				meatS += (item.name + " ");
+			}
+			if (item.type == "Grain") {
+				checkExpiration(item);
+				grain++;
+				grainP += item.price;
+				totalP += item.price;
+				grainS += (item.name + " ");
+			}
+			if (item.type == "Other") {
+				checkExpiration(item);
+				other++;
+				dairyP += item.price;
+				totalP += item.price;
+				otherS += (item.name + " ");
+			}
+			totalItems++;
+		}
+		
+		// If any values are null, no point is drawn for them. This is good!!
+		var theTrip = {
+			dairy: dairy,
+			meat: meat, 
+			veggies: veggies,
+			fruit: fruit,
+			grocery: grocery,
+			alcohol: alcohol,
+			grain: grain,
+			other: other,
+			dairyP: dairyP, 
+			meatP: meatP, 
+			veggiesP: veggiesP,
+			fruitP: fruitP,
+			groceryP: groceryP,
+			alcoholP: alcoholP,
+			grainP: grainP,
+			otherP: otherP,
+			dairyS: dairyS, 
+			meatS: meatS, 
+			veggiesS: veggiesS,
+			fruitS: fruitS,
+			groceryS: groceryS,
+			alcoholS: alcoholS,
+			grainS: grainS,
+			otherS: otherS,
+			totalP: totalP, 
+			date: date
+		};
+		
+		// Add to an array of trips and an array of expiration items
+		trips.push(theTrip);
+	}
+	
+	// Draw the charts (originally occurred onload, now we load data first)
+	drawPieChart(trips);
+	drawLineGraph(trips);
+	drawGauge(totalItems, expiredItems);
 }
 
 function drawPieChart(trips) {
