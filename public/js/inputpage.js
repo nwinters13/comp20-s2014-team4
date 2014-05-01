@@ -26,22 +26,19 @@ function myCreateFunction()
 
   var rowLength = table.rows.length;
   var row = table.insertRow(rowLength);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-  var cell6 = row.insertCell(5);
-  var cell7 = row.insertCell(6);
-  var cell8 = row.insertCell(7);
-  cell1.innerHTML = "Item:";
-  cell2.innerHTML = "<input id='item' value='air' >";
-  cell3.innerHTML = "Type:";
-  cell4.innerHTML = "<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select>";
-  cell5.innerHTML = "Price:";
-  cell6.innerHTML = "<input id='price' value='0'>";
-  cell7.innerHTML = "Expiration Date:";
-  cell8.innerHTML = "<input size='2' >/<input  size='2'>/<input  size='4' >";
+  var cell0 = row.insertCell(0);
+  var cell1 = row.insertCell(1);
+  var cell2 = row.insertCell(2);
+  var cell3 = row.insertCell(3);
+  cell0.className = 'success';
+  cell1.className = 'warning';
+  cell2.className = 'info';
+  cell3.className = 'danger';
+
+  cell0.innerHTML = "<input id='item' class='text-center' value='air' >";
+  cell1.innerHTML = "<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select>";
+  cell2.innerHTML = "<input id='price' class='text-center' value='0'>";
+  cell3.innerHTML = "<input size='2' class='text-center' > <strong>/</strong> <input  size='2' class='text-center'> <strong>/</strong> <input class='text-center' size='4' >";
 
   }
 }
@@ -108,6 +105,10 @@ for(var i=0; i<rowLength; i+=1){
   home();
 
 }
-function home(){
+function logout(){
+   window.location.href = "http://costeater.herokuapp.com/";
+}
+
+function graphs(){
    window.location.href = "http://costeater.herokuapp.com/graphs";
 }

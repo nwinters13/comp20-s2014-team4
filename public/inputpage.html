@@ -7,30 +7,53 @@
 	  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 </head>
 
-<div id="homeButton">
-<button onclick="home()">Home</button>
+<body background="http://i.imgur.com/rlZtbtW.jpg">
+
+<div id="Buttons">
+<button onclick="logout()" class="btn btn-info col-md-6 pull-left btn btn-warning">Log Out</button>
+<button onclick="graphs()" class="btn btn-info col-md-6 pull-right btn btn-danger">Graphs</button>
 </div>
 
-<div id="user">
-</div>
+
+
+<br>
+
+
 
 <center>
 
-<h2>Add New Trip</h2>
 
 
-Date:<input id="dm" size="2" >/<input id="dd" size="2">/<input id="dy" size="4" >
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h1><strong>ADD A TRIP</strong></h1>
+	</div>
 
-<table id="myTable" class="table table-striped table-bordered text-center">
+	<div class="panel-body lead"><strong>DATE </strong><input size="2" class='text-center' ><strong> / </strong>
+		  <input  size="2" class='text-center'><strong> / </strong><input  size="4" class='text-center'>
+	</div>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+<table id="headerTable"  class="table table-striped table-bordered text-center">
 <tr>
-	<td>Item:</td>
-	<td><input name="item" value='air' ></td>
-	<td>Type:</td>
-	<td><select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select></td>
-	<td>Price:</td>
-	<td><input name="price" value='0'></td>
-	<td>Expiration Date:</td>
-	<td><input size="2" >/<input  size="2">/<input  size="4" ></td>
+	<td class="success h4 col-sm-2"><h4><strong>ITEM</strong></h4></td>
+	<td class="warning col-sm-2"><h4><strong>TYPE</strong></h4></td>
+	<td class="info col-sm-2"><h4><strong>PRICE</strong></h4></td>
+	<td class="danger col-sm-2"><h4><strong>EXPIRATION DATE</strong></h4></td>
+</tr>
+</div>
+
+<table id="myTable" class="table active table-bordered text-center">
+<tr>
+
+	<td class='success col-sm-2'><input name="item" value='air' class='text-center'></td>
+
+	<td class='warning col-sm-2'><select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select></td>
+
+	<td class='info col-sm-2'><input name="price" value='0' class='text-center'></td>
+
+	<td class='danger col-sm-2'><input size="2" class='text-center'><strong> / </strong><input class='text-center' size="2"><strong> / </strong><input  size="4" class='text-center'></td>
 </tr>
 </table>
 
