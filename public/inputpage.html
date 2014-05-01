@@ -3,7 +3,7 @@
 
 <head>
 	<title>Cost Eater Product Page</title>
-	<link rel="stylesheet" type="text/css" href="../public/css/inputpage.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css">
 	  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 </head>
 
@@ -25,7 +25,7 @@ Date:<input id="dm" size="2" >/<input id="dd" size="2">/<input id="dy" size="4" 
 <tr>
 	<td>Item:<input name="item" value='air' ></td>
 	<td>Type:<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select></td>
-	<td>Price:<input name="price" value='0'></td>
+	<td class="bg-primary"><h4>Price:</h4><input name="price" value='0'></td>
 	<td>Expiration Date:<input size="2" >/<input  size="2">/<input  size="4" ></td>
 </tr>
 </table>
@@ -33,9 +33,9 @@ Date:<input id="dm" size="2" >/<input id="dd" size="2">/<input id="dy" size="4" 
 
 
 
-<button onclick="myCreateFunction()">Add Item</button>
-<button onclick="myDeleteFunction()">Delete Item</button>
-<button onclick="sendData()">finish</button>
+<button onclick="myCreateFunction()" type="button" class="btn btn-success navbar-btn">Add Item</button>
+<button onclick="myDeleteFunction()" type="button" class="btn btn-danger">Delete Item</button>
+<button onclick="sendData()" type="button" class="btn btn-primary">finish</button>
 
 <center>
 <script type="text/javascript" src="../public/js/inputpage.js"></script>

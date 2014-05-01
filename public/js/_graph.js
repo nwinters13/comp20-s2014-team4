@@ -49,20 +49,15 @@ function loadData() {
 	console.log("called loadData() with user: " + user);
 	// jQuery get function to grab all the data from our DB
 	var url = "http://costeater.heroku.com/user.json?email=" + user;
+	console.log('about to call get');
+	console.log(url);
 	$.get(url, function (data){
 	//$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
 			// Gather all of the necessary data for our charts
-			var pos = -1;
-			var user = localStorage['CEemail'];
-			for (var iter in data) {
-				if(data[iter].email == user){
-					pos = iter;
-				}
-			}
-			if(pos >= 0) {
-				for (var tripInt in data[pos].trips) {	
-					var date = new Date(data[pos].trips[tripInt].date.year, data[pos].trips[tripInt].date.month, data[pos].trips[tripInt].date.day);
-					for (var itemInt in data[pos].trips[tripInt].items) {
+				console.log('thats right im in it');
+				for (var tripInt in data[0].trips) {	
+					var date = new Date(data[0].trips[tripInt].date.year, data[0].trips[tripInt].date.month, data[0].trips[tripInt].date.day);
+					for (var itemInt in data[0].trips[tripInt].items) {
 						var item = data[0].trips[tripInt].items[itemInt];
 						if (item.type == "dairy") {
 							dairy++;
