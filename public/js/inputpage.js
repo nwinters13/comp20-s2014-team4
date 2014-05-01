@@ -31,10 +31,17 @@ function myCreateFunction()
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
   var cell5 = row.insertCell(4);
-  cell1.innerHTML = "Item:<input id='item' value='air' >";
-  cell2.innerHTML = "Type:<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select>";
-  cell3.innerHTML = "Price:<input id='price' value='0'>";
-  cell4.innerHTML = "Expiration Date:<input size='2' >/<input  size='2'>/<input  size='4' >";
+  var cell6 = row.insertCell(5);
+  var cell7 = row.insertCell(6);
+  var cell8 = row.insertCell(7);
+  cell1.innerHTML = "Item:";
+  cell2.innerHTML = "<input id='item' value='air' >";
+  cell3.innerHTML = "Type:";
+  cell4.innerHTML = "<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select>";
+  cell5.innerHTML = "Price:";
+  cell6.innerHTML = "<input id='price' value='0'>";
+  cell7.innerHTML = "Expiration Date:";
+  cell8.innerHTML = "<input size='2' >/<input  size='2'>/<input  size='4' >";
 
   }
 }

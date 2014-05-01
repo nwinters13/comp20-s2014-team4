@@ -38,7 +38,7 @@ function sendTheMail(m, params) {
 // Send the email!
 
     m.messages.send(params, function(res) {
-        window.location.href = "http://costeater.herokuapp.com/graphs";
+        window.location.href = "http://costeater.herokuapp.com/input";
     }, function(err) {
         console.log(err);
     });
