@@ -60,50 +60,50 @@ function loadData() {
 						var item = data[0].trips[tripInt].items[itemInt];
 						if (item.type == "dairy") {
 							dairy++;
-							dairyP += item.price;
-							totalP += item.price;
+							dairyP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							dairyS += (item.name + " ");
 						}
 						if (item.type == "veggies") {
 							veggies++;
-							veggiesP += item.price;
-							totalP += item.price;
+							veggiesP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							veggiesS += (item.name + " ");
 						}
 						if (item.type == "fruit") {
 							fruit++;
-							fruitP += item.price;
-							totalP += item.price;
+							fruitP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							fruitS += (item.name + " ");
 						}
 						if (item.type == "grocery") {
 							grocery++;
-							groceryP += item.price;
-							totalP += item.price;
+							groceryP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							groceryS += (item.name + " ");
 						}
 						if (item.type == "alcohol") {
 							alcohol++;
-							alcoholP += item.price;
-							totalP += item.price;
+							alcoholP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							alcoholS += (item.name + " ");
 						}	
 						if (item.type == "meat") {
 							meat++;
-							meatP += item.price;
-							totalP += item.price;
+							meatP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							meatS += (item.name + " ");
 						}
 						if (item.type == "grain") {
 							grain++;
-							grainP += item.price;
-							totalP += item.price;
+							grainP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							grainS += (item.name + " ");
 						}
 						if (item.type == "other") {
 							other++;
-							otherP += item.price;
-							totalP += item.price;
+							otherP += parseInt(item.price);
+							totalP += parseInt(item.price);
 							otherS += (item.name + " ");
 						}
 						totalItems++;

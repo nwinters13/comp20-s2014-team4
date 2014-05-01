@@ -58,7 +58,6 @@ function sendData(){
 
 $(":date").bind("onShow onHide", function()  {
   $(this).parent().toggleClass("active");
-  console.log('haha');
 });
 
 
@@ -78,7 +77,7 @@ for(var i=1; i<rowLength; i+=1){
   item.name = row.cells[0].firstChild.value;
   if (item.name === "") {break;}
   item.type = row.cells[1].firstChild.value;
-  item.price = parseInt(row.cells[2].firstChild.value-0);
+  item.price = row.cells[2].firstChild.value-0;
   if (typeof item.price != 'number' || item.price < 0) {break;
   }
   exp = {}
