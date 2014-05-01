@@ -4,33 +4,29 @@
 <head>
 	<title>Cost Eater Product Page</title>
 	<link rel="stylesheet" type="text/css" href="../public/css/inputpage.css">
-	<script type="text/javascript" src="../public/js/jquery.min.js"></script>
+	  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 </head>
 
-<body>
+<div id="homeButton">
+<button onclick="home()">Home</button>
+</div>
+
+<div id="user">
+</div>
 
 <center>
 
-
-
-
 <h2>Add New Trip</h2>
-Date:
-<select id="date">
-  <option value="today">today</option>
-  <option value="yesterday">yesterday</option>
-  <option value="yesyesterday">yesyesterday</option>
-  <option value="yesyesyesterday">yesyesyesterday</option>
-</select>
 
 
+Date:<input id="dm" size="2" >/<input id="dd" size="2">/<input id="dy" size="4" >
 
 <table id="myTable">
 <tr>
-	<td>Item:<input name="item" ></td>
-	<td>Type:<input name="type" ></td>
-	<td>Price:<input name="price"></td>
-	<td>Days:<input name="days" ></td>
+	<td>Item:<input name="item" value='air' ></td>
+	<td>Type:<select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select></td>
+	<td>Price:<input name="price" value='0'></td>
+	<td>Expiration Date:<input size="2" >/<input  size="2">/<input  size="4" ></td>
 </tr>
 </table>
 
