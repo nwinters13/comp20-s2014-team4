@@ -48,6 +48,14 @@ app.get('/graphs.html', function(req, res) {
     res.sendfile('./public/graphpage.html');    
 });
 
+app.get('/input', function(req, res) {
+    res.sendfile('./public/inputpage.html');
+});
+
+app.get('/input.html', function(req, res) {
+    res.sendfile('./public/inputpage.html');
+});
+
 app.get('/js/_graph.js', function(req, res) {
     res.sendfile('./public/js/_graph.js');
 });
