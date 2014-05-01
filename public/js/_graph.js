@@ -52,61 +52,69 @@ function loadData() {
 	$.get(url, function (data){
 	//$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
 			// Gather all of the necessary data for our charts
-			for (var tripInt in data[0].trips) {	
-				var date = new Date(data[0].trips[tripInt].date.year, data[0].trips[tripInt].date.month, data[0].trips[tripInt].date.day);
-				for (var itemInt in data[0].trips[tripInt].items) {
-					var item = data[0].trips[tripInt].items[itemInt];
-					if (item.type == "dairy") {
-						dairy++;
-						dairyP += item.price;
-						totalP += item.price;
-						dairyS += (item.name + " ");
-					}
-					if (item.type == "veggies") {
-						veggies++;
-						veggiesP += item.price;
-						totalP += item.price;
-						veggiesS += (item.name + " ");
-					}
-					if (item.type == "fruit") {
-						fruit++;
-						fruitP += item.price;
-						totalP += item.price;
-						fruitS += (item.name + " ");
-					}
-					if (item.type == "grocery") {
-						grocery++;
-						groceryP += item.price;
-						totalP += item.price;
-						groceryS += (item.name + " ");
-					}
-					if (item.type == "alcohol") {
-						alcohol++;
-						alcoholP += item.price;
-						totalP += item.price;
-						alcoholS += (item.name + " ");
-					}	
-					if (item.type == "meat") {
-						meat++;
-						meatP += item.price;
-						totalP += item.price;
-						meatS += (item.name + " ");
-					}
-					if (item.type == "grain") {
-						grain++;
-						grainP += item.price;
-						totalP += item.price;
-						grainS += (item.name + " ");
-					}
-					if (item.type == "other") {
-						other++;
-						dairyP += item.price;
-						totalP += item.price;
-						otherS += (item.name + " ");
-					}
-					totalItems++;
+			var pos = -1;
+			var user = localStorage['CEemail'];
+			for (var iter in data) {
+				if(data[iter].email == user){
+					pos = iter;
 				}
-				
+			}
+			if(pos >= 0) {
+				for (var tripInt in data[pos].trips) {	
+					var date = new Date(data[pos].trips[tripInt].date.year, data[pos].trips[tripInt].date.month, data[pos].trips[tripInt].date.day);
+					for (var itemInt in data[pos].trips[tripInt].items) {
+						var item = data[0].trips[tripInt].items[itemInt];
+						if (item.type == "dairy") {
+							dairy++;
+							dairyP += item.price;
+							totalP += item.price;
+							dairyS += (item.name + " ");
+						}
+						if (item.type == "veggies") {
+							veggies++;
+							veggiesP += item.price;
+							totalP += item.price;
+							veggiesS += (item.name + " ");
+						}
+						if (item.type == "fruit") {
+							fruit++;
+							fruitP += item.price;
+							totalP += item.price;
+							fruitS += (item.name + " ");
+						}
+						if (item.type == "grocery") {
+							grocery++;
+							groceryP += item.price;
+							totalP += item.price;
+							groceryS += (item.name + " ");
+						}
+						if (item.type == "alcohol") {
+							alcohol++;
+							alcoholP += item.price;
+							totalP += item.price;
+							alcoholS += (item.name + " ");
+						}	
+						if (item.type == "meat") {
+							meat++;
+							meatP += item.price;
+							totalP += item.price;
+							meatS += (item.name + " ");
+						}
+						if (item.type == "grain") {
+							grain++;
+							grainP += item.price;
+							totalP += item.price;
+							grainS += (item.name + " ");
+						}
+						if (item.type == "other") {
+							other++;
+							dairyP += item.price;
+							totalP += item.price;
+							otherS += (item.name + " ");
+						}
+						totalItems++;
+					}
+				}
 				// If any values are null, no point is drawn for them. This is good!!
 				var theTrip = {
 					dairy: dairy,
