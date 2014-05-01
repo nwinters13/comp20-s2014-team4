@@ -48,8 +48,9 @@ function loadData() {
 	var user = localStorage['CEemail'];
 	console.log("called loadData() with user: " + user);
 	// jQuery get function to grab all the data from our DB
-	//$.get("http://costeater.heroku.com/user.json?email=" + user, function (data){
-	$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
+	var url = "http://costeater.heroku.com/user.json?email=" + user;
+	$.get(url, function (data){
+	//$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
 			// Gather all of the necessary data for our charts
 			for (var tripInt in data[0].trips) {	
 				var date = new Date(data[0].trips[tripInt].date.year, data[0].trips[tripInt].date.month, data[0].trips[tripInt].date.day);
