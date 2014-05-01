@@ -46,7 +46,7 @@ var expirationTrips = [];
 function loadData() {
 	// Get the user's email which has been stored in localStorage[]
 	var user = localStorage['CEemail'];
-	console.log("called loadData() with user: " + user);
+	// console.log("called loadData() with user: " + user);
 	// jQuery get function to grab all the data from our DB
 	var url = "http://costeater.herokuapp.com/user.json?email=" + user;
 	$.get(url, function (data){
@@ -100,7 +100,7 @@ function loadData() {
 						}
 						if (item.type == "other") {
 							other++;
-							dairyP += item.price;
+							otherP += item.price;
 							totalP += item.price;
 							otherS += (item.name + " ");
 						}
