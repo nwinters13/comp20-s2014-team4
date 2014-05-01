@@ -60,6 +60,10 @@ app.get('/js/_graph.js', function(req, res) {
     res.sendfile('./public/js/_graph.js');
 });
 
+app.get('/js/inputpage.js', function(req, res) {
+    res.sendfile('./public/js/inputpage.js');
+});
+
 app.get('/js/_main.js', function(req, res) {
     res.sendfile('./public/js/_main.js');
 });
