@@ -103,5 +103,4 @@ for(var i=0; i<rowLength; i+=1){
 }
 function home(){
    window.location.href = "http://costeater.herokuapp.com/graphs";
-
 }
