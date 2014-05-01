@@ -28,6 +28,10 @@ app.get('/', function(req, res) {
     res.sendfile('./public/login.html');
 });
 
+app.get('/login', function(req, res) {
+    res.sendfile('./public/login.html');
+});
+
 app.get('/login.html', function(req, res) {
     res.sendfile('./public/login.html');
 });
