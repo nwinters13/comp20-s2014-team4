@@ -39,6 +39,8 @@ var expiringItems = [];
 var expirationTrips = []; 
 
 
+document.getElementById('user').innerHTML="<a href='http://costeater.herokuapp.com/input.html' l='prev'> Add a New Trip ("  + localStorage["CEemail"]+")";
+
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
