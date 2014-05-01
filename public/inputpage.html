@@ -5,13 +5,16 @@
 	<title>Cost Eater Product Page</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+
 </head>
 
 <body background="http://i.imgur.com/rlZtbtW.jpg">
 
 <div id="Buttons">
-<button onclick="logout()" class="btn btn-info col-md-6 pull-left btn btn-warning">Log Out</button>
-<button onclick="graphs()" class="btn btn-info col-md-6 pull-right btn btn-danger">Graphs</button>
+
+<button onclick="logout()" id="user" class="btn btn-info col-md-6 pull-left btn btn-warning">Log Out</button>
+<button onclick="graphs()" id="graphs"class="btn btn-info col-md-6 pull-right btn btn-danger">Graphs</button>
 </div>
 
 
@@ -29,8 +32,8 @@
 		<h1><strong>ADD A TRIP</strong></h1>
 	</div>
 
-	<div class="panel-body lead"><strong>DATE </strong><input size="2" class='text-center' ><strong> / </strong>
-		  <input  size="2" class='text-center'><strong> / </strong><input  size="4" class='text-center'>
+	<div class="panel-body lead"><strong>DATE </strong><input size="2" id="dm" class='text-center' ><strong> / </strong>
+		  <input  size="2" id="dd" class='text-center'><strong> / </strong><input  id="dy" size="4" class='text-center'>
 	</div>
 </div>
 
@@ -47,13 +50,7 @@
 <table id="myTable" class="table active table-bordered text-center">
 <tr>
 
-	<td class='success col-sm-2'><input name="item" value='air' class='text-center'></td>
 
-	<td class='warning col-sm-2'><select><option value='grocery'>Grocery</option><option value='veggies'>Veggies</option><option value='fruit'>Fruit</option><option value='dairy'>Dairy</option><option value='alcohol'>Alcohol</option><option value='meat'>Meat</option><option value='grain'>Grain</option><option value='other'>Other</option></select></td>
-
-	<td class='info col-sm-2'><input name="price" value='0' class='text-center'></td>
-
-	<td class='danger col-sm-2'><input size="2" class='text-center'><strong> / </strong><input class='text-center' size="2"><strong> / </strong><input  size="4" class='text-center'></td>
 </tr>
 </table>
 
