@@ -78,14 +78,13 @@ for(var i=1; i<rowLength; i+=1){
   item.name = row.cells[0].firstChild.value;
   if (item.name === "") {break;}
   item.type = row.cells[1].firstChild.value;
-  item.price = row.cells[2].firstChild.value-0;
+  item.price = parseInt(row.cells[2].firstChild.value-0);
   if (typeof item.price != 'number' || item.price < 0) {break;
   }
   exp = {}
   exp.month = row.cells[3].firstChild.value-1;
   exp.day= row.cells[3].childNodes[4].value-0;
   exp.year=row.cells[3].childNodes[8].value-0;
-  console.log(exp);
   item.expiration = exp;
   newtrip.items.push(item);
 }
