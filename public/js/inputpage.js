@@ -105,7 +105,7 @@ if(newtrip.items.length == 0) return;
     email: em,
     trip: newtrip
   };
-  alert(JSON.stringify(newtrip));
+  //alert(JSON.stringify(newtrip));
   $.post("http://costeater.herokuapp.com/post.json", json );
 
   graphs();
