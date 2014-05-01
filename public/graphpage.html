@@ -18,13 +18,75 @@
 			body {
 				font-family: 'Open Sans', sans-serif;
 			}
+			.back-link {
+				position: fixed;
+				top: 20px;
+				left: 20px;
+				z-index:9999;
+			}
+			.back-link a {
+				color: #fff8de;
+				padding: 8px 10px;
+				background-color: rgba(0,0,0,0.6);
+				text-decoration: none; 
+				border-bottom: 1px #fff8de solid;
+				opacity: 0.7;
+				
+			  -webkit-transition: opacity 0.3s ease-out; 
+			     -moz-transition: opacity 0.3s ease-out; 
+			       -o-transition: opacity 0.3s ease-out; 
+			          transition: opacity 0.3s ease-out; 
+
+			}
+			.back-link a:hover,
+			.back-link a:focus {
+				color: #ffffff; 
+				text-decoration: none;
+				border-bottom: 1px #ffffff solid;
+				opacity: 1;
+			}
+			.input-page {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				z-index: 1000000;
+			}
+			.input-page a {
+				color: #fff8de;
+				padding: 8px 10px;
+				background-color: rgba(0,0,0,0.6);
+				text-decoration: none; 
+				border-bottom: 1px #fff8de solid;
+				opacity: 0.7;
+				
+			  -webkit-transition: opacity 0.3s ease-out; 
+			     -moz-transition: opacity 0.3s ease-out; 
+			       -o-transition: opacity 0.3s ease-out; 
+			          transition: opacity 0.3s ease-out; 
+
+			}
+			.input-page a:hover,
+			.input-page a:focus {
+				color: #ffffff; 
+				text-decoration: none;
+				border-bottom: 1px #ffffff solid;
+				opacity: 1;
+			}
 		</style>
     </head>
     <body class="loading">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-       	
+        
+       	<nav class="back-link">
+			<span class="nav-previous"><a href="http://costeater.herokuapp.com/" l="prev">Back to Login</a></span>
+		</nav><!-- .nav-single -->
+		
+		<nav class="input-page">
+			<span class="nav-previous"><a href="http://costeater.herokuapp.com/input.html" l="prev">Add a New Trip</a></span>
+		</nav><!-- .nav-single -->
+		
        	<div id="preload">
 	       	<img src="http://i.imgur.com/ZyZdcOT.jpg">
 	       	<img src="http://i.imgur.com/BbjIF6A.jpg">
