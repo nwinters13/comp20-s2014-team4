@@ -48,7 +48,7 @@ function loadData() {
 	var user = localStorage['CEemail'];
 	console.log("called loadData() with user: " + user);
 	// jQuery get function to grab all the data from our DB
-	var url = "http://costeater.heroku.com/user.json?email=" + user;
+	var url = "http://costeater.herokuapp.com/user.json?email=" + user;
 	$.get(url, function (data){
 	//$.get("http://costeater.herokuapp.com/user.json?email=sal@boners.edu", function (data){
 			// Gather all of the necessary data for our charts
