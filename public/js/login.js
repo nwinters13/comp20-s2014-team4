@@ -8,7 +8,6 @@ function onLogin(){
     else {
         localStorage['CEemail'] = msg;
     }
-    console.log(localStorage['CEemail']);
     // create a new instance of the Mandrill class with your API key
     var m = new mandrill.Mandrill('TnrrHAw7RE87k-8ejmpQ0A');
 
@@ -21,7 +20,7 @@ function onLogin(){
             "text": "We here at the Cost Eater Headquarters would like to thank you for taking the time to enjoy what Cost Eater has to offer!"
         }
     };
-    console.log(localStorage['CEemail']);
+
 
     if(newUser == true){
         sendTheMail(m, params);
@@ -37,10 +36,9 @@ function onLogin(){
 
 function sendTheMail(m, params) {
 // Send the email!
-    console.log(localStorage['CEemail']);
 
     m.messages.send(params, function(res) {
-        window.location.href = "file:///C:/Users/tischlaptoplend/Documents/GitHub/comp20-s2014-team4/public/graphpage.html";
+        window.location.href = "http://costeater.herokuapp.com/graphs";
     }, function(err) {
         console.log(err);
     });
